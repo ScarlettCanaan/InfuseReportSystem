@@ -1,0 +1,54 @@
+# Project: DSM-300_test
+# Makefile created by Dev-C++ 5.4.2
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = ../prj/obj/DSM-300_test_private.res
+OBJ      = ../prj/obj/lcd.o ../prj/obj/main.o ../prj/obj/shell.o ../prj/obj/telnet.o ../prj/obj/serial.o ../prj/obj/guiMain.o ../prj/obj/guiPage.o ../prj/obj/rfLabel.o $(RES)
+LINKOBJ  = ../prj/obj/lcd.o ../prj/obj/main.o ../prj/obj/shell.o ../prj/obj/telnet.o ../prj/obj/serial.o ../prj/obj/guiMain.o ../prj/obj/guiPage.o ../prj/obj/rfLabel.o $(RES)
+LIBS     = -L"d:/Program Files/Dev-Cpp/MinGW32/lib" -static-libstdc++ -static-libgcc -mwindows "C:/Program Files/Dev-Cpp/MinGW32/lib/libws2_32.a" "C:/Program Files/Dev-Cpp/MinGW32/lib/libgdi32.a" ../lib/dsGuiLib.a 
+INCS     = -I"d:/Program Files/Dev-Cpp/MinGW32/include" -I"../lib" -I"../src/gui" -I"../src/app" -I"../src/rfid"
+CXXINCS  = -I"d:/Program Files/Dev-Cpp/MinGW32/include" -I"../lib" -I"../src/gui" -I"../src/app" -I"../src/rfid"
+BIN      = DSM-300_test.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+../prj/obj/lcd.o: ../src/app/lcd.c
+	$(CC) -c ../src/app/lcd.c -o ../prj/obj/lcd.o $(CFLAGS)
+
+../prj/obj/main.o: ../src/app/main.c
+	$(CC) -c ../src/app/main.c -o ../prj/obj/main.o $(CFLAGS)
+
+../prj/obj/shell.o: ../src/app/shell.c
+	$(CC) -c ../src/app/shell.c -o ../prj/obj/shell.o $(CFLAGS)
+
+../prj/obj/telnet.o: ../src/app/telnet.c
+	$(CC) -c ../src/app/telnet.c -o ../prj/obj/telnet.o $(CFLAGS)
+
+../prj/obj/serial.o: ../src/app/serial.c
+	$(CC) -c ../src/app/serial.c -o ../prj/obj/serial.o $(CFLAGS)
+
+../prj/obj/guiMain.o: ../src/gui/guiMain.c
+	$(CC) -c ../src/gui/guiMain.c -o ../prj/obj/guiMain.o $(CFLAGS)
+
+../prj/obj/guiPage.o: ../src/gui/guiPage.c
+	$(CC) -c ../src/gui/guiPage.c -o ../prj/obj/guiPage.o $(CFLAGS)
+
+../prj/obj/rfLabel.o: ../src/rfid/rfLabel.c
+	$(CC) -c ../src/rfid/rfLabel.c -o ../prj/obj/rfLabel.o $(CFLAGS)
+
+../prj/obj/DSM-300_test_private.res: DSM-300_test_private.rc DSM-300_test_private.rc 
+	$(WINDRES) -i DSM-300_test_private.rc --input-format=rc -o ../prj/obj/DSM-300_test_private.res -O coff 
